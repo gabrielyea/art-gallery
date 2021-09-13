@@ -2,9 +2,9 @@
 
 .mainContainer {
   background-image:
-    linear-gradient(to bottom, rgba(65, 65, 65, 0.438), rgba(0, 0, 0, 0.705)),
+    linear-gradient(to bottom, rgba(26, 25, 25, 0.733), rgba(0, 0, 0, 0.747)),
     url('./monet.jpg');
-  filter: grayscale(80%);
+  filter: grayscale(50%);
   display: grid;
   grid-template-rows: 1fr 1fr;
   height: 100vh;
