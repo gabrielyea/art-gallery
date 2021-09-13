@@ -10,7 +10,7 @@
 ![img](./misc/screenshot.png)
 ## Live Demo
 You can see my page live here: 
-[Check it out!](https://stonks-time.netlify.app/)
+[Check it out!](https://art-gallery-react.netlify.app/)
 
 ## Preview
 
