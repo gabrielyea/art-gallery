@@ -1,0 +1,91 @@
+@use '../../shared/utils.scss'as *;
+
+.mainContainer {
+  @include flexCenter();
+
+  align-items: baseline;
+
+  form {
+    @include flexCenter();
+
+    align-items: flex-end;
+    flex-direction: column;
+
+    .inputContainer {
+      @include flexCenter();
+
+      flex-direction: row-reverse;
+      gap: 1em;
+
+      input {
+        font-size: 1rem;
+        border: 1px solid;
+        border-radius: 4px;
+        background-color: rgba(255, 255, 255, 0.075);
+        border-color: white;
+        color: white;
+      }
+
+      button {
+        @include flexCenter();
+
+        width: 2em;
+        height: 2em;
+        background-color: transparent;
+        border: none;
+      }
+    }
+
+    .icon {
+      width: 2em;
+      height: 2em;
+      fill: white;
+    }
+
+    .optionsContainer {
+      display: flex;
+      gap: 1em;
+
+      .option {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.281);
+        padding: 0.5em;
+        margin: 1em 0;
+        border-radius: 8px;
+      }
+
+      .selected {
+        color: white;
+        background-color: rgba(44, 44, 44, 0.651);
+        padding: 0.5em;
+        margin: 1em 0;
+        border-radius: 8px;
+        border: 1px white solid;
+      }
+    }
+  }
+}
+
+@include desktopResolution() {
+  .mainContainer {
+    align-items: center;
+
+    form {
+      @include flexCenter();
+
+      align-items: flex-start;
+
+      .inputContainer {
+        @include flexCenter();
+
+        flex-direction: row;
+        gap: 1em;
+
+        input {
+          font-size: 2rem;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+}
