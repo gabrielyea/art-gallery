@@ -3,7 +3,7 @@
 ![](https://img.shields.io/badge/JavaScript-yellow)
 ![](https://img.shields.io/badge/SCSS-pink)
 
-# React Crypto Tracker.
+# Art gallery
 > This applications lets you keep track of your favorite crypto currencies.
 
 ## Screenshots
