@@ -11,19 +11,22 @@ const Home = () => {
     <div className={styles.mainContainer}>
       <DecorationBar
         totalSize={x}
-        internalPos={{ x, y: '40' }}
-        screenPos={{ top: 250, right: 0 }}
+        rotate="180deg"
+        screenPos={{ top: 250 }}
       />
-      <div className={styles.titleContainer}>
-        <h1>
-          Welcome to the gallery.
-        </h1>
-      </div>
-      <Search />
+      <header className={styles.headerContainer}>
+
+        <div className={styles.titleContainer}>
+          <h1>
+            Welcome to the gallery.
+          </h1>
+        </div>
+        <Search />
+      </header>
       <DecorationBar
         totalSize={x}
-        internalPos={{ x: '40', y: '40' }}
-        screenPos={{ top: 700, right: 0 }}
+        rotate="0deg"
+        screenPos={{ top: 700 }}
       />
     </div>
   );

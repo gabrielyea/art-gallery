@@ -3,18 +3,10 @@
 import { motion } from 'framer-motion';
 import styles from './decorationBarStyle.module.scss';
 
-const DecorationBar = ({ internalPos, screenPos, totalSize }) => {
+const DecorationBar = ({ rotate, screenPos, totalSize }) => {
   const sidebar = {
-    animate: {
-      clipPath: `circle(${totalSize * 1.1}px at ${internalPos.x}px 40px)`,
-      transition: {
-        type: 'spring',
-        stiffness: 20,
-        restDelta: 2,
-      },
-    },
     initial: {
-      clipPath: `circle(0 at ${internalPos.x}px 40px)`,
+      clipPath: 'polygon(0px 0px, 50px 0px, 50px 50px, 0px 50px)',
       transition: {
         delay: 0.5,
         type: 'spring',
@@ -22,11 +14,19 @@ const DecorationBar = ({ internalPos, screenPos, totalSize }) => {
         damping: 40,
       },
     },
+    animate: {
+      clipPath: `polygon(0px 0px, ${totalSize * 1.1}px 0px, ${totalSize * 1.1}px 50px, 0px 50px)`,
+      transition: {
+        type: 'spring',
+        stiffness: 20,
+        restDelta: 2,
+      },
+    },
   };
   return (
     <motion.div
       className={styles.mainContainer}
-      style={{ top: screenPos.top, right: screenPos.right }}
+      style={{ top: screenPos.top, rotate }}
     >
       <motion.div
         className={styles.decorationBar}

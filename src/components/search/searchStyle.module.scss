@@ -24,13 +24,14 @@
         background-color: rgba(255, 255, 255, 0.075);
         border-color: white;
         color: white;
+        padding: 0.1em 0.2em;
       }
 
       button {
         @include flexCenter();
 
-        width: 2em;
-        height: 2em;
+        width: 5em;
+        height: 5em;
         background-color: transparent;
         border: none;
       }
@@ -46,12 +47,23 @@
       display: flex;
       gap: 1em;
 
+      button {
+        scale: 1;
+        transition: all ease-in 0.1s;
+
+        &:hover {
+          scale: 1.1;
+          transition: all ease-in 0.1s;
+        }
+      }
+
       .option {
         color: white;
         background-color: rgba(255, 255, 255, 0.281);
         padding: 0.5em;
         margin: 1em 0;
         border-radius: 8px;
+        border: none;
       }
 
       .selected {

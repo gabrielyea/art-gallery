@@ -5,36 +5,45 @@
     linear-gradient(to bottom, rgba(26, 25, 25, 0.733), rgba(0, 0, 0, 0.747)),
     url('./monet.jpg');
   filter: grayscale(50%);
-  display: grid;
-  grid-template-rows: 1fr 1fr;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  .titleContainer {
-    @include flexCenter();
+  .headerContainer {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
 
-    align-items: flex-end;
+    .titleContainer {
+      @include flexCenter();
 
-    h1 {
-      color: white;
-      font-size: 2rem;
-      text-align: end;
-      padding: 1em;
+      align-items: flex-end;
+
+      h1 {
+        color: white;
+        font-size: 2rem;
+        text-align: end;
+        padding: 1em;
+      }
     }
   }
 }
 
 @include desktopResolution() {
   .mainContainer {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    .headerContainer {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
 
-    .titleContainer {
-      @include flexCenter();
+      .titleContainer {
+        @include flexCenter();
 
-      align-items: center;
+        align-items: center;
 
-      h1 {
-        font-size: 5rem;
+        h1 {
+          font-size: 5rem;
+        }
       }
     }
   }
