@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { motion } from 'framer-motion';
+import Avatar from '../item/Avatar';
 import styles from './itemsGalleryStyle.module.scss';
 
 const container = {
@@ -10,8 +11,8 @@ const container = {
   animate: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
+      staggerChildren: 0.5,
+      delayChildren: 0.5,
     },
   },
   exit: {
@@ -24,15 +25,13 @@ const container = {
 };
 
 const ItemsGallery = ({ list }) => {
-  const items = [1, 2, 3, 4];
+  const items = [{ id: 1, author: 'Monet' }, { id: 2, author: 'Rembrant' }, { id: 3, author: 'Velasquez' }, { id: 4, author: 'Golla' }];
 
   const createItems = () => items.map((item) => (
-    <div
-      key={item}
-      style={{ width: '200px', height: '200px', backgroundColor: 'pink' }}
-    >
-      { item }
-    </div>
+    <Avatar
+      key={item.id}
+      data={item}
+    />
   ));
   return (
     <div
