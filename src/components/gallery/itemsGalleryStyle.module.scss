@@ -1,33 +1,20 @@
-@use '../../utils/utils'as *;
+@use '../../shared/utils'as *;
 
 .mainContainer {
-  @include setFont();
+  width: 100%;
+  position: absolute;
+  top: 1000px;
 
-  list-style: none;
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: repeat(5, 10rem);
-  grid-template-columns: 1fr 1fr;
-
-  li:nth-child(odd) {
-    background-color: var(--mainColor2);
-  }
-
-  li:nth-child(even) {
-    background-color: var(--mainColor3);
-  }
-}
-
-@include desktopResolution() {
-  .mainContainer {
+  .itemList {
     @include setFont();
 
+    width: 100%;
     list-style: none;
     display: grid;
     grid-auto-flow: column;
-    grid-template-rows: repeat(5, 20rem);
+    grid-template-rows: repeat(5, 10rem);
     grid-template-columns: 1fr 1fr;
-    gap: 1em;
+    justify-items: center;
 
     li:nth-child(odd) {
       background-color: var(--mainColor2);
@@ -35,6 +22,28 @@
 
     li:nth-child(even) {
       background-color: var(--mainColor3);
+    }
+  }
+}
+
+@include desktopResolution() {
+  .mainContainer {
+    .itemList {
+      @include setFont();
+
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1em;
+
+      li:nth-child(odd) {
+        background-color: var(--mainColor2);
+      }
+
+      li:nth-child(even) {
+        background-color: var(--mainColor3);
+      }
     }
   }
 }
