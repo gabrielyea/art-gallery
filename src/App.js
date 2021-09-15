@@ -1,10 +1,14 @@
+import { AnimatePresence } from 'framer-motion';
 import Home from './pages/home_page/Home';
 
 function App() {
   return (
     <div className="App">
-      <Home />
+      <AnimatePresence exitBeforeEnter initial>
+        <Home />
+      </AnimatePresence>
     </div>
+
   );
 }
 

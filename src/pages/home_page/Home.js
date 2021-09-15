@@ -1,18 +1,35 @@
 /* eslint-disable no-unused-vars */
+import { motion } from 'framer-motion';
+import useToggle from '../../components/customHooks/useToggle';
 import useWindowDimensions from '../../components/customHooks/useWindowDimensions';
 import DecorationBar from '../../components/decoration_bar/DecorationBar';
+import ItemsGallery from '../../components/gallery/ItemsGallery';
 import Search from '../../components/search/Search';
 import styles from './homeStyle.module.scss';
 
+const container = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+  },
+};
+
 const Home = () => {
-  const [x, y] = useWindowDimensions();
+  const { x } = useWindowDimensions();
+  const [search, toggleSearch] = useToggle(false, true);
 
   return (
-    <div className={styles.mainContainer}>
+    <motion.div
+      className={styles.mainContainer}
+      initial="initial"
+      animate="animate"
+      variants={container}
+    >
       <DecorationBar
         totalSize={x}
         rotate="180deg"
-        screenPos={{ top: 250 }}
       />
       <header className={styles.headerContainer}>
 
@@ -21,14 +38,16 @@ const Home = () => {
             Welcome to the gallery.
           </h1>
         </div>
-        <Search />
+        <Search search={toggleSearch} />
       </header>
       <DecorationBar
         totalSize={x}
         rotate="0deg"
-        screenPos={{ top: 700 }}
       />
-    </div>
+      {search && (
+        <ItemsGallery />
+      )}
+    </motion.div>
   );
 };
 

@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { motion } from 'framer-motion';
 import styles from './itemsGalleryStyle.module.scss';
-import Filter from '../filter/Filter';
 
 const container = {
   initial: {
@@ -23,9 +23,23 @@ const container = {
   },
 };
 
-const ItemsGallery = ({ list, displayNum }) => (
-  <div title="gallery">
-    {list
+const ItemsGallery = ({ list }) => {
+  const items = [1, 2, 3, 4];
+
+  const createItems = () => items.map((item) => (
+    <div
+      key={item}
+      style={{ width: '200px', height: '200px', backgroundColor: 'pink' }}
+    >
+      { item }
+    </div>
+  ));
+  return (
+    <div
+      className={styles.mainContainer}
+      title="gallery"
+    >
+      {items
         && (
           <motion.ul
             data-testid="gallery"
@@ -33,12 +47,13 @@ const ItemsGallery = ({ list, displayNum }) => (
             initial="initial"
             animate="animate"
             exit="exit"
-            className={styles.mainContainer}
+            className={styles.itemList}
           >
-            <Filter list={list} filterValue={displayNum} />
+            {createItems()}
           </motion.ul>
         )}
-  </div>
-);
+    </div>
+  );
+};
 
 export default ItemsGallery;

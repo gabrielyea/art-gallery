@@ -26,7 +26,7 @@ const DecorationBar = ({ rotate, screenPos, totalSize }) => {
   return (
     <motion.div
       className={styles.mainContainer}
-      style={{ top: screenPos.top, rotate }}
+      style={{ rotate }}
     >
       <motion.div
         className={styles.decorationBar}
