@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 import useToggle from '../../components/customHooks/useToggle';
 import useWindowDimensions from '../../components/customHooks/useWindowDimensions';
 import DecorationBar from '../../components/decoration_bar/DecorationBar';
@@ -19,6 +20,15 @@ const container = {
 const Home = () => {
   const { x } = useWindowDimensions();
   const [search, toggleSearch] = useToggle(false, true);
+  const mainContainer = useRef(null);
+
+  useEffect(() => {
+    mainContainer.current.addEventListener('DOMNodeInserted', (event) => {
+      if (event.target.title === 'gallery') {
+        event.target.scrollIntoView();
+      }
+    });
+  }, []);
 
   return (
     <motion.div
@@ -26,6 +36,7 @@ const Home = () => {
       initial="initial"
       animate="animate"
       variants={container}
+      ref={mainContainer}
     >
       <DecorationBar
         totalSize={x}
