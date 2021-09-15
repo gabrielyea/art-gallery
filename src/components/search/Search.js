@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -55,7 +56,7 @@ const shadowAnim = {
   },
 };
 
-const Search = () => {
+const Search = ({ search }) => {
   const [option, setOption] = useState('author');
 
   const handleClick = (e) => {
@@ -63,9 +64,14 @@ const Search = () => {
     setOption(e.target.value);
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    search();
+  };
+
   return (
     <motion.div className={styles.mainContainer}>
-      <motion.form variants={container} initial="initial" animate="animate">
+      <motion.form variants={container} initial="initial" animate="animate" onSubmit={handleSearch}>
         <div className={styles.optionsContainer}>
           <motion.button
             variants={children2}
@@ -95,7 +101,6 @@ const Search = () => {
             />
           </motion.div>
           <motion.button type="submit">
-            {/* <RiSearchLine className={styles.icon} /> */}
             <MGlassIcon />
           </motion.button>
         </div>
