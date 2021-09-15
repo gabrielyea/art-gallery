@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
 import { motion } from 'framer-motion';
-import { BiRightArrowCircle } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
 import styles from './itemStyle.module.scss';
 
 const variants = {
@@ -38,13 +36,6 @@ const Item = ({ data }) => {
       className={styles.mainContainer}
       variants={variants}
     >
-      <Link
-        className={styles.link}
-        to={`/detail/${data.id}`}
-      >
-        <BiRightArrowCircle className={styles.icon} />
-      </Link>
-      <h2>{data.symbol}</h2>
       <motion.div
         className={styles.dataContainer}
         variants={child}
