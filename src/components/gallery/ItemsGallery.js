@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useSelector } from 'react-redux';
 import Avatar from '../item/Avatar';
 import styles from './itemsGalleryStyle.module.scss';
 
@@ -24,21 +27,58 @@ const container = {
   },
 };
 
-const ItemsGallery = ({ list }) => {
-  const items = [{ id: 1, author: 'Monet' }, { id: 2, author: 'Rembrant' }, { id: 3, author: 'Velasquez' }, { id: 4, author: 'Golla' }];
+const viewVariants = {
+  hide: {
+    opacity: 0,
+    transition: {
+      duration: 1,
+    },
+  },
+  show: {
+    opacity: 1,
+    transition: {
+      duration: 1,
+    },
+  },
+};
 
-  const createItems = () => items.map((item) => (
+const ItemsGallery = ({ list }) => {
+  const [ref, inView] = useInView();
+  const controls = useAnimation();
+  const allWorks = useSelector((state) => state.list.entities);
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('show');
+    } else {
+      controls.start('hide');
+    }
+  }, [controls, inView]);
+
+  // const createItems = () => works.map((item) => (
+  //   <Avatar
+  //     key={item.objectID}
+  //     data={item}
+  //   />
+  // ));
+
+  const createOne = (index) => (
     <Avatar
-      key={item.id}
-      data={item}
+      key={allWorks[index]}
+      search={allWorks[index]}
     />
-  ));
+  );
+
+  const handleClick = () => {
+    document.documentElement.scrollTop = 0;
+  };
+
   return (
     <div
       className={styles.mainContainer}
       title="gallery"
     >
-      {items
+      {allWorks.length > 0
         && (
           <motion.ul
             data-testid="gallery"
@@ -48,9 +88,19 @@ const ItemsGallery = ({ list }) => {
             exit="exit"
             className={styles.itemList}
           >
-            {createItems()}
+            {createOne(0)}
+            {createOne(1)}
           </motion.ul>
         )}
+      <motion.button
+        variants={viewVariants}
+        animate={controls}
+        ref={ref}
+        style={{ width: '100%', height: '50px' }}
+        onClick={handleClick}
+      >
+        heelo
+      </motion.button>
     </div>
   );
 };

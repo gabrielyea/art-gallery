@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-vars */
-import { motion } from 'framer-motion';
+import {
+  motion, useAnimation, useTransform, useViewportScroll,
+} from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import { useInView } from 'react-intersection-observer';
 import useToggle from '../../components/customHooks/useToggle';
 import useWindowDimensions from '../../components/customHooks/useWindowDimensions';
 import DecorationBar from '../../components/decoration_bar/DecorationBar';
@@ -49,7 +52,9 @@ const Home = () => {
             Welcome to the gallery.
           </h1>
         </div>
-        <Search search={toggleSearch} />
+        <Search
+          search={toggleSearch}
+        />
       </header>
       <DecorationBar
         totalSize={x}

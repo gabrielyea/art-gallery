@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { RiSearchLine } from 'react-icons/ri';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import { fetchData } from './searchSlice';
+import { fetchList } from './listSlice';
 import MGlassIcon from './MGlassIcon';
 import styles from './searchStyle.module.scss';
 
@@ -58,6 +60,22 @@ const shadowAnim = {
 
 const Search = ({ search }) => {
   const [option, setOption] = useState('author');
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.list.loading);
+  const list = useSelector((state) => state.list.entities);
+  const ref = useRef(null);
+
+  const getFromList = (index) => {
+    const query = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${list[index]}`;
+    dispatch(fetchData(query));
+  };
+
+  // useEffect(() => {
+  //   if (loading === 'idle' && list.length > 0) {
+  //     getFromList(0);
+  //     getFromList(1);
+  //   }
+  // }, [loading]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -66,6 +84,8 @@ const Search = ({ search }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    const query = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${ref.current?.value}`;
+    dispatch(fetchList(query));
     search();
   };
 
@@ -93,6 +113,7 @@ const Search = ({ search }) => {
         <div className={styles.inputContainer}>
           <motion.div variants={children1}>
             <motion.input
+              ref={ref}
               variants={shadowAnim}
               animate="animate"
               whileFocus="open"

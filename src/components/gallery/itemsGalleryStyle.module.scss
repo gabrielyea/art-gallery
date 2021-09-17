@@ -1,14 +1,13 @@
 @use '../../shared/utils'as *;
 
 .mainContainer {
-  width: 100%;
   position: absolute;
+  width: 100%;
   top: 1500px;
 
   .itemList {
     @include setFont();
 
-    width: 100%;
     list-style: none;
     display: grid;
     grid-auto-flow: column;

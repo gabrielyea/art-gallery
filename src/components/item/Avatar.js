@@ -3,9 +3,12 @@
 import {
   AnimatePresence, AnimateSharedLayout, motion, useAnimation,
 } from 'framer-motion';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import useToggle from '../customHooks/useToggle';
+import { fetchData } from '../search/searchSlice';
 import styles from './avatarStyle.module.scss';
 
 const variants = {
@@ -62,10 +65,17 @@ const child = {
   },
 };
 
-const Avatar = ({ data }) => {
+const Avatar = ({ search }) => {
+  const [current, setCurrent] = useState(null);
   const [open, toggleOpen] = useToggle(false, true);
   const [ref, inView] = useInView({ threshold: 0.5 });
   const controls = useAnimation();
+
+  const getFromList = async () => {
+    const query = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${search}`;
+    const response = await axios.get(query);
+    setCurrent(response.data);
+  };
 
   useEffect(() => {
     if (inView) {
@@ -75,38 +85,44 @@ const Avatar = ({ data }) => {
     }
   }, [controls, inView]);
 
+  useEffect(() => {
+    getFromList();
+  }, []);
+
   return (
     <AnimateSharedLayout>
-      <motion.li className={styles.mainContainer} variants={variants}>
-        <motion.div
-          ref={ref}
-          animate={controls}
-          className={styles.img}
-          onClick={toggleOpen}
-          layout
-          variants={viewVariants}
-        />
-        <AnimatePresence>
-          {open && (
+      {current !== null && (
+        <motion.li className={styles.mainContainer} variants={variants}>
           <motion.div
-            variants={parent}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className={styles.paintData}
-          >
-            <motion.p variants={child}>
-              { data.author }
-            </motion.p>
-            <motion.p variants={child}>
-              Ut occaecat enim proident in
-              aliqua ullamco aute veniam laborum duis exercitation reprehenderit veniam.
-            </motion.p>
-          </motion.div>
+            ref={ref}
+            animate={controls}
+            className={styles.img}
+            onClick={toggleOpen}
+            layout
+            variants={viewVariants}
+            style={{ backgroundImage: `url(${current.primaryImage})` }}
+          />
+          <AnimatePresence>
+            {open && (
+            <motion.div
+              variants={parent}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className={styles.paintData}
+            >
+              <motion.p variants={child}>
+                {search.artistDisplayName}
+              </motion.p>
+              <motion.p variants={child}>
+                {search.title}
+              </motion.p>
+            </motion.div>
 
-          )}
-        </AnimatePresence>
-      </motion.li>
+            )}
+          </AnimatePresence>
+        </motion.li>
+      )}
     </AnimateSharedLayout>
   );
 };

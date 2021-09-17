@@ -8,7 +8,7 @@ const DecorationBar = ({ rotate, screenPos, totalSize }) => {
     initial: {
       clipPath: 'polygon(0px 0px, 50px 0px, 50px 50px, 0px 50px)',
       transition: {
-        delay: 0.5,
+        delay: 1,
         type: 'spring',
         stiffness: 400,
         damping: 40,
@@ -18,7 +18,7 @@ const DecorationBar = ({ rotate, screenPos, totalSize }) => {
       clipPath: `polygon(0px 0px, ${totalSize * 1.1}px 0px, ${totalSize * 1.1}px 50px, 0px 50px)`,
       transition: {
         type: 'spring',
-        stiffness: 20,
+        stiffness: 10,
         restDelta: 2,
       },
     },
