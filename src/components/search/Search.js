@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
@@ -66,18 +65,17 @@ const Search = ({ search }) => {
   const ref = useRef(null);
 
   const getFromList = (index) => {
-    const query = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${list[index]}`;
-    dispatch(fetchData(query));
+    const queries = [1, 2, 3, 4].map((q) => `https://collectionapi.metmuseum.org/public/collection/v1/objects/${list[q]}`);
+    dispatch(fetchData([...queries]));
   };
 
-  // useEffect(() => {
-  //   if (loading === 'idle' && list.length > 0) {
-  //     getFromList(0);
-  //     getFromList(1);
-  //   }
-  // }, [loading]);
+  useEffect(() => {
+    if (loading === 'idle' && list.length > 0) {
+      getFromList(0);
+    }
+  }, [loading]);
 
-  const handleClick = (e) => {
+  const handleOption = (e) => {
     e.preventDefault();
     setOption(e.target.value);
   };
@@ -96,7 +94,7 @@ const Search = ({ search }) => {
           <motion.button
             variants={children2}
             className={option === 'author' ? styles.selected : styles.option}
-            onClick={(e) => handleClick(e, 'author')}
+            onClick={(e) => handleOption(e, 'author')}
             value="author"
           >
             Author
@@ -104,7 +102,7 @@ const Search = ({ search }) => {
           <motion.button
             variants={children2}
             className={option === 'work' ? styles.selected : styles.option}
-            onClick={(e) => handleClick(e, 'work')}
+            onClick={(e) => handleOption(e, 'work')}
             value="work"
           >
             Work
