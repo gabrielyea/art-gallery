@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { motion, useAnimation } from 'framer-motion';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useSelector } from 'react-redux';
 import Avatar from '../item/Avatar';
@@ -42,10 +41,15 @@ const viewVariants = {
   },
 };
 
-const ItemsGallery = ({ list }) => {
+const ItemsGallery = () => {
   const [ref, inView] = useInView();
   const controls = useAnimation();
-  const allWorks = useSelector((state) => state.list.entities);
+  const allWorks = useSelector((state) => state.works.entities);
+  const galleryRef = useRef(null);
+
+  useEffect(() => {
+    galleryRef.current?.scrollIntoView();
+  }, [allWorks]);
 
   useEffect(() => {
     if (inView) {
@@ -55,19 +59,12 @@ const ItemsGallery = ({ list }) => {
     }
   }, [controls, inView]);
 
-  // const createItems = () => works.map((item) => (
-  //   <Avatar
-  //     key={item.objectID}
-  //     data={item}
-  //   />
-  // ));
-
-  const createOne = (index) => (
+  const createItems = () => allWorks.map((item) => (
     <Avatar
-      key={allWorks[index]}
-      search={allWorks[index]}
+      key={item.objectID}
+      data={item}
     />
-  );
+  ));
 
   const handleClick = () => {
     document.documentElement.scrollTop = 0;
@@ -81,6 +78,7 @@ const ItemsGallery = ({ list }) => {
       {allWorks.length > 0
         && (
           <motion.ul
+            ref={galleryRef}
             data-testid="gallery"
             variants={container}
             initial="initial"
@@ -88,8 +86,7 @@ const ItemsGallery = ({ list }) => {
             exit="exit"
             className={styles.itemList}
           >
-            {createOne(0)}
-            {createOne(1)}
+            {createItems()}
           </motion.ul>
         )}
       <motion.button
