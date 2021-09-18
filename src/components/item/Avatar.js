@@ -35,14 +35,17 @@ const viewVariants = {
 
 const parent = {
   initial: {
+    opacity: 0,
   },
   animate: {
+    opacity: 1,
     transition: {
       staggerChildren: 0.2,
       delayChildren: 0.2,
     },
   },
   exit: {
+    opacity: 0,
     transition: {
       staggerChildren: 0.1,
     },
@@ -74,37 +77,59 @@ const Avatar = ({ data }) => {
     }
   }, [controls, inView]);
 
+  const openStyle = { backgroundImage: `url(${data.primaryImageSmall})`, height: '70%' };
+  const closeStyle = { backgroundImage: `url(${data.primaryImageSmall})`, height: '90%' };
+
   return (
     <AnimateSharedLayout>
       <motion.li className={styles.mainContainer} variants={variants}>
         <motion.div
+          className={styles.imgContainer}
           ref={ref}
           animate={controls}
-          className={styles.img}
-          onClick={toggleOpen}
-          layout
           variants={viewVariants}
-          style={{ backgroundImage: `url(${data.primaryImageSmall})` }}
-        />
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              variants={parent}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              className={styles.paintData}
-            >
-              <motion.p variants={child}>
-                {data.artistDisplayName}
-              </motion.p>
-              <motion.p variants={child}>
-                {data.title}
-              </motion.p>
-            </motion.div>
-
-          )}
-        </AnimatePresence>
+        >
+          <motion.div
+            className={styles.img}
+            onClick={toggleOpen}
+            style={open ? openStyle : closeStyle}
+            layout
+          />
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                className={styles.paintData}
+                variants={parent}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                layout
+              >
+                <motion.p variants={child}>
+                  Artist:
+                  {' '}
+                  {data.artistDisplayName}
+                </motion.p>
+                <motion.p variants={child}>
+                  Title:
+                  {' '}
+                  {data.title}
+                </motion.p>
+                <motion.p variants={child}>
+                  Bio:
+                  {' '}
+                  { data.artistDisplayBio }
+                  {data.artistDisplayName}
+                </motion.p>
+                <motion.p variants={child}>
+                  classification:
+                  {' '}
+                  {data.classification}
+                </motion.p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </motion.li>
     </AnimateSharedLayout>
   );
