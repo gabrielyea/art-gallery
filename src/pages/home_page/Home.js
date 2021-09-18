@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-vars */
-import { motion } from 'framer-motion';
+import {
+  motion, useAnimation, useTransform, useViewportScroll,
+} from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import useToggle from '../../components/customHooks/useToggle';
 import useWindowDimensions from '../../components/customHooks/useWindowDimensions';
 import DecorationBar from '../../components/decoration_bar/DecorationBar';
@@ -21,14 +24,19 @@ const Home = () => {
   const { x } = useWindowDimensions();
   const [search, toggleSearch] = useToggle(false, true);
   const mainContainer = useRef(null);
+  const galleryRef = useRef(null);
+  const works = useSelector((state) => state.works);
 
   useEffect(() => {
-    mainContainer.current.addEventListener('DOMNodeInserted', (event) => {
-      if (event.target.title === 'gallery') {
-        event.target.scrollIntoView();
-      }
-    });
-  }, []);
+    if (works.loading === 'idle' && works.entities.length > 0) {
+      galleryRef.current?.scrollIntoView();
+    }
+    // mainContainer.current.addEventListener('DOMNodeInserted', (event) => {
+    //   if (event.target.title === 'gallery') {
+    //     event.target.scrollIntoView();
+    //   }
+    // });
+  }, [works.loading]);
 
   return (
     <motion.div
@@ -49,14 +57,16 @@ const Home = () => {
             Welcome to the gallery.
           </h1>
         </div>
-        <Search search={toggleSearch} />
+        <Search
+          search={toggleSearch}
+        />
       </header>
       <DecorationBar
         totalSize={x}
         rotate="0deg"
       />
       {search && (
-        <ItemsGallery />
+        <ItemsGallery ref={galleryRef} />
       )}
     </motion.div>
   );

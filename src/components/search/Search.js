@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { RiSearchLine } from 'react-icons/ri';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import { fetchData } from './searchSlice';
+import { fetchList } from './listSlice';
 import MGlassIcon from './MGlassIcon';
 import styles from './searchStyle.module.scss';
 
@@ -58,14 +59,31 @@ const shadowAnim = {
 
 const Search = ({ search }) => {
   const [option, setOption] = useState('author');
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.list.loading);
+  const list = useSelector((state) => state.list.entities);
+  const ref = useRef(null);
 
-  const handleClick = (e) => {
+  const getFromList = () => {
+    const que = [0, 1, 2, 3].map((q) => `https://collectionapi.metmuseum.org/public/collection/v1/objects/${list[q]}`);
+    dispatch(fetchData([...que]));
+  };
+
+  useEffect(() => {
+    if (loading === 'idle' && list.length > 0) {
+      getFromList(0);
+    }
+  }, [loading]);
+
+  const handleOption = (e) => {
     e.preventDefault();
     setOption(e.target.value);
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
+    const query = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${ref.current?.value}`;
+    dispatch(fetchList(query));
     search();
   };
 
@@ -76,7 +94,7 @@ const Search = ({ search }) => {
           <motion.button
             variants={children2}
             className={option === 'author' ? styles.selected : styles.option}
-            onClick={(e) => handleClick(e, 'author')}
+            onClick={(e) => handleOption(e, 'author')}
             value="author"
           >
             Author
@@ -84,7 +102,7 @@ const Search = ({ search }) => {
           <motion.button
             variants={children2}
             className={option === 'work' ? styles.selected : styles.option}
-            onClick={(e) => handleClick(e, 'work')}
+            onClick={(e) => handleOption(e, 'work')}
             value="work"
           >
             Work
@@ -93,6 +111,7 @@ const Search = ({ search }) => {
         <div className={styles.inputContainer}>
           <motion.div variants={children1}>
             <motion.input
+              ref={ref}
               variants={shadowAnim}
               animate="animate"
               whileFocus="open"

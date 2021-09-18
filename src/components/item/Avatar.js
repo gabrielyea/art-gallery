@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import {
   AnimatePresence, AnimateSharedLayout, motion, useAnimation,
 } from 'framer-motion';
@@ -85,24 +84,24 @@ const Avatar = ({ data }) => {
           onClick={toggleOpen}
           layout
           variants={viewVariants}
+          style={{ backgroundImage: `url(${data.primaryImageSmall})` }}
         />
         <AnimatePresence>
           {open && (
-          <motion.div
-            variants={parent}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className={styles.paintData}
-          >
-            <motion.p variants={child}>
-              { data.author }
-            </motion.p>
-            <motion.p variants={child}>
-              Ut occaecat enim proident in
-              aliqua ullamco aute veniam laborum duis exercitation reprehenderit veniam.
-            </motion.p>
-          </motion.div>
+            <motion.div
+              variants={parent}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className={styles.paintData}
+            >
+              <motion.p variants={child}>
+                {data.artistDisplayName}
+              </motion.p>
+              <motion.p variants={child}>
+                {data.title}
+              </motion.p>
+            </motion.div>
 
           )}
         </AnimatePresence>
