@@ -16,14 +16,6 @@
     justify-items: center;
     margin: 10em 0;
     row-gap: 5em;
-
-    li:nth-child(odd) {
-      background-color: var(--mainColor2);
-    }
-
-    li:nth-child(even) {
-      background-color: var(--mainColor3);
-    }
   }
 }
 
@@ -38,14 +30,6 @@
       grid-template-rows: 1fr 1fr;
       gap: 1em;
       row-gap: 5em;
-
-      li:nth-child(odd) {
-        background-color: var(--mainColor2);
-      }
-
-      li:nth-child(even) {
-        background-color: var(--mainColor3);
-      }
     }
   }
 }
