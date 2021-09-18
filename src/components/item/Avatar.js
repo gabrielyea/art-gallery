@@ -1,14 +1,10 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import {
   AnimatePresence, AnimateSharedLayout, motion, useAnimation,
 } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import useToggle from '../customHooks/useToggle';
-import { fetchData } from '../search/searchSlice';
 import styles from './avatarStyle.module.scss';
 
 const variants = {
@@ -65,17 +61,10 @@ const child = {
   },
 };
 
-const Avatar = ({ search }) => {
-  const [current, setCurrent] = useState(null);
+const Avatar = ({ data }) => {
   const [open, toggleOpen] = useToggle(false, true);
   const [ref, inView] = useInView({ threshold: 0.5 });
   const controls = useAnimation();
-
-  const getFromList = async () => {
-    const query = `https://collectionapi.metmuseum.org/public/collection/v1/objects/${search}`;
-    const response = await axios.get(query);
-    setCurrent(response.data);
-  };
 
   useEffect(() => {
     if (inView) {
@@ -85,25 +74,20 @@ const Avatar = ({ search }) => {
     }
   }, [controls, inView]);
 
-  useEffect(() => {
-    getFromList();
-  }, []);
-
   return (
     <AnimateSharedLayout>
-      {current !== null && (
-        <motion.li className={styles.mainContainer} variants={variants}>
-          <motion.div
-            ref={ref}
-            animate={controls}
-            className={styles.img}
-            onClick={toggleOpen}
-            layout
-            variants={viewVariants}
-            style={{ backgroundImage: `url(${current.primaryImage})` }}
-          />
-          <AnimatePresence>
-            {open && (
+      <motion.li className={styles.mainContainer} variants={variants}>
+        <motion.div
+          ref={ref}
+          animate={controls}
+          className={styles.img}
+          onClick={toggleOpen}
+          layout
+          variants={viewVariants}
+          style={{ backgroundImage: `url(${data.primaryImage})` }}
+        />
+        <AnimatePresence>
+          {open && (
             <motion.div
               variants={parent}
               initial="initial"
@@ -112,17 +96,16 @@ const Avatar = ({ search }) => {
               className={styles.paintData}
             >
               <motion.p variants={child}>
-                {search.artistDisplayName}
+                {data.artistDisplayName}
               </motion.p>
               <motion.p variants={child}>
-                {search.title}
+                {data.title}
               </motion.p>
             </motion.div>
 
-            )}
-          </AnimatePresence>
-        </motion.li>
-      )}
+          )}
+        </AnimatePresence>
+      </motion.li>
     </AnimateSharedLayout>
   );
 };
