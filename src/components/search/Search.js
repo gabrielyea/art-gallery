@@ -64,9 +64,9 @@ const Search = ({ search }) => {
   const list = useSelector((state) => state.list.entities);
   const ref = useRef(null);
 
-  const getFromList = (index) => {
-    const queries = [1, 2, 3, 4].map((q) => `https://collectionapi.metmuseum.org/public/collection/v1/objects/${list[q]}`);
-    dispatch(fetchData([...queries]));
+  const getFromList = () => {
+    const que = [0, 1, 2, 3].map((q) => `https://collectionapi.metmuseum.org/public/collection/v1/objects/${list[q]}`);
+    dispatch(fetchData([...que]));
   };
 
   useEffect(() => {
