@@ -2,7 +2,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchList = createAsyncThunk('coins/fetchList', async (query) => {
+export const fetchList = createAsyncThunk('list/fetchList', async (query) => {
   const response = await axios.get(query);
   return response.data.objectIDs;
 });
