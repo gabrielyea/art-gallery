@@ -2,13 +2,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchData = createAsyncThunk('coins/fetchData', async (query) => {
-  const response = await axios.get(query);
-  // const work = response.data.map((w) => ({
-  //   image: w.primaryImage,
-  // }));
-  const work = [response.data];
-  return work;
+export const fetchData = createAsyncThunk('works/fetchData', async ([...queries]) => {
+  const query = [...queries].map((q) => axios.get(q));
+  const response = await axios.all([...query]);
+  const batch = response.map((r) => r.data);
+  return batch;
 });
 
 export const searchSlice = createSlice({
