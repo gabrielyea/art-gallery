@@ -84,7 +84,7 @@ const Avatar = ({ data }) => {
           onClick={toggleOpen}
           layout
           variants={viewVariants}
-          style={{ backgroundImage: `url(${data.primaryImage})` }}
+          style={{ backgroundImage: `url(${data.primaryImageSmall})` }}
         />
         <AnimatePresence>
           {open && (
