@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
-import { useSelector } from 'react-redux';
 import ScrollToTop from '../../components/buttons/ScrollToTop';
 import useToggle from '../../components/customHooks/useToggle';
 import useWindowDimensions from '../../components/customHooks/useWindowDimensions';
