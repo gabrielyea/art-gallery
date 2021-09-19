@@ -1,8 +1,5 @@
-/* eslint-disable no-unused-vars */
-import {
-  motion, useAnimation, useTransform, useViewportScroll,
-} from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import ScrollToTop from '../../components/buttons/ScrollToTop';
 import useToggle from '../../components/customHooks/useToggle';
@@ -25,19 +22,6 @@ const Home = () => {
   const { x } = useWindowDimensions();
   const [search, toggleSearch] = useToggle(false, true);
   const mainContainer = useRef(null);
-  const galleryRef = useRef(null);
-  const works = useSelector((state) => state.works);
-
-  useEffect(() => {
-    if (works.loading === 'idle' && works.entities.length > 0) {
-      galleryRef.current?.scrollIntoView();
-    }
-    // mainContainer.current.addEventListener('DOMNodeInserted', (event) => {
-    //   if (event.target.title === 'gallery') {
-    //     event.target.scrollIntoView();
-    //   }
-    // });
-  }, [works.loading]);
 
   return (
     <>
@@ -69,7 +53,7 @@ const Home = () => {
           rotate="0deg"
         />
         {search && (
-        <ItemsGallery ref={galleryRef} />
+        <ItemsGallery />
         )}
       </motion.div>
     </>
