@@ -11,19 +11,10 @@
     list-style: none;
     display: grid;
     grid-auto-flow: column;
-    grid-template-rows: repeat(5, 10rem);
     grid-template-columns: 1fr 1fr;
     justify-items: center;
     margin: 10em 0;
     row-gap: 5em;
-
-    li:nth-child(odd) {
-      background-color: var(--mainColor2);
-    }
-
-    li:nth-child(even) {
-      background-color: var(--mainColor3);
-    }
   }
 }
 
@@ -34,18 +25,11 @@
 
       list-style: none;
       display: grid;
+      grid-auto-rows: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+      grid-auto-flow: dense;
       gap: 1em;
       row-gap: 5em;
-
-      li:nth-child(odd) {
-        background-color: var(--mainColor2);
-      }
-
-      li:nth-child(even) {
-        background-color: var(--mainColor3);
-      }
     }
   }
 }

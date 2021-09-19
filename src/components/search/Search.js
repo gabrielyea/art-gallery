@@ -2,10 +2,10 @@
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
-import { fetchData } from './searchSlice';
 import { fetchList } from './listSlice';
 import MGlassIcon from './MGlassIcon';
 import styles from './searchStyle.module.scss';
+import useDataGetter from '../customHooks/useDataGetter';
 
 const container = {
   initial: {
@@ -63,11 +63,7 @@ const Search = ({ search }) => {
   const loading = useSelector((state) => state.list.loading);
   const list = useSelector((state) => state.list.entities);
   const ref = useRef(null);
-
-  const getFromList = () => {
-    const que = [0, 1, 2, 3].map((q) => `https://collectionapi.metmuseum.org/public/collection/v1/objects/${list[q]}`);
-    dispatch(fetchData([...que]));
-  };
+  const { getFromList } = useDataGetter();
 
   useEffect(() => {
     if (loading === 'idle' && list.length > 0) {

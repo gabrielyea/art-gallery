@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
-import { useInView } from 'react-intersection-observer';
 import { useSelector } from 'react-redux';
 import Avatar from '../item/Avatar';
+import LoadingArea from '../loading/LoadingArea';
 import styles from './itemsGalleryStyle.module.scss';
 
 const container = {
@@ -26,38 +26,15 @@ const container = {
   },
 };
 
-const viewVariants = {
-  hide: {
-    opacity: 0,
-    transition: {
-      duration: 1,
-    },
-  },
-  show: {
-    opacity: 1,
-    transition: {
-      duration: 1,
-    },
-  },
-};
-
 const ItemsGallery = () => {
-  const [ref, inView] = useInView();
-  const controls = useAnimation();
   const allWorks = useSelector((state) => state.works.entities);
   const galleryRef = useRef(null);
 
   useEffect(() => {
-    galleryRef.current?.scrollIntoView();
-  }, [allWorks]);
-
-  useEffect(() => {
-    if (inView) {
-      controls.start('show');
-    } else {
-      controls.start('hide');
+    if (allWorks.length === 4) {
+      galleryRef.current?.scrollIntoView();
     }
-  }, [controls, inView]);
+  }, [allWorks]);
 
   const createItems = () => allWorks.map((item) => (
     <Avatar
@@ -65,10 +42,6 @@ const ItemsGallery = () => {
       data={item}
     />
   ));
-
-  const handleClick = () => {
-    document.documentElement.scrollTop = 0;
-  };
 
   return (
     <div
@@ -89,15 +62,7 @@ const ItemsGallery = () => {
             {createItems()}
           </motion.ul>
         )}
-      <motion.button
-        variants={viewVariants}
-        animate={controls}
-        ref={ref}
-        style={{ width: '100%', height: '50px' }}
-        onClick={handleClick}
-      >
-        heelo
-      </motion.button>
+      <LoadingArea />
     </div>
   );
 };
