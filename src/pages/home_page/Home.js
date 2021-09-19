@@ -4,6 +4,7 @@ import {
 } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import ScrollToTop from '../../components/buttons/ScrollToTop';
 import useToggle from '../../components/customHooks/useToggle';
 import useWindowDimensions from '../../components/customHooks/useWindowDimensions';
 import DecorationBar from '../../components/decoration_bar/DecorationBar';
@@ -39,36 +40,39 @@ const Home = () => {
   }, [works.loading]);
 
   return (
-    <motion.div
-      className={styles.mainContainer}
-      initial="initial"
-      animate="animate"
-      variants={container}
-      ref={mainContainer}
-    >
-      <DecorationBar
-        totalSize={x}
-        rotate="180deg"
-      />
-      <header className={styles.headerContainer}>
-
-        <div className={styles.titleContainer}>
-          <h1>
-            Welcome to the gallery.
-          </h1>
-        </div>
-        <Search
-          search={toggleSearch}
+    <>
+      <ScrollToTop />
+      <motion.div
+        className={styles.mainContainer}
+        initial="initial"
+        animate="animate"
+        variants={container}
+        ref={mainContainer}
+      >
+        <DecorationBar
+          totalSize={x}
+          rotate="180deg"
         />
-      </header>
-      <DecorationBar
-        totalSize={x}
-        rotate="0deg"
-      />
-      {search && (
+        <header className={styles.headerContainer}>
+
+          <div className={styles.titleContainer}>
+            <h1>
+              Welcome to the gallery.
+            </h1>
+          </div>
+          <Search
+            search={toggleSearch}
+          />
+        </header>
+        <DecorationBar
+          totalSize={x}
+          rotate="0deg"
+        />
+        {search && (
         <ItemsGallery ref={galleryRef} />
-      )}
-    </motion.div>
+        )}
+      </motion.div>
+    </>
   );
 };
 

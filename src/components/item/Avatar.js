@@ -134,4 +134,5 @@ const Avatar = ({ data }) => {
     </AnimateSharedLayout>
   );
 };
+
 export default Avatar;
