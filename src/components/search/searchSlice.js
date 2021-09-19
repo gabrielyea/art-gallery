@@ -20,7 +20,7 @@ export const searchSlice = createSlice({
         state.status = 'normal';
       })
       .addCase(fetchData.fulfilled, (state, action) => {
-        state.entities = [...action.payload];
+        state.entities.push(...action.payload);
         state.loading = 'idle';
         state.status = 'normal';
       })
