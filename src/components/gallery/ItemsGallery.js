@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import { motion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Avatar from '../item/Avatar';
+import LoadingArea from '../loading/LoadingArea';
 import styles from './itemsGalleryStyle.module.scss';
 
 const container = {
@@ -30,7 +31,9 @@ const ItemsGallery = () => {
   const galleryRef = useRef(null);
 
   useEffect(() => {
-    galleryRef.current?.scrollIntoView();
+    if (allWorks.length === 4) {
+      galleryRef.current?.scrollIntoView();
+    }
   }, [allWorks]);
 
   const createItems = () => allWorks.map((item) => (
@@ -59,6 +62,7 @@ const ItemsGallery = () => {
             {createItems()}
           </motion.ul>
         )}
+      <LoadingArea />
     </div>
   );
 };
