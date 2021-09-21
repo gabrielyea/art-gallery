@@ -56,7 +56,6 @@ const Home = () => {
         />
         {search && (
           <>
-            {console.log(loading)}
             <Loader loading={loading} status={status} auto={false} position="80%">
               <ItemsGallery />
             </Loader>
