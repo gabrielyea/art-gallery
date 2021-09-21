@@ -4,6 +4,7 @@
   position: absolute;
   width: 100%;
   top: 1500px;
+  right: 0;
 
   .itemList {
     @include setFont();
