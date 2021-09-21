@@ -1,4 +1,4 @@
-@use '../../utils/utils' as *;
+@use '../../shared/utils.scss' as *;
 
 .mainContainer {
   @include setFont();
