@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './loaderStyle.module.scss';
-import { ReactComponent as Logo } from '../../pages/doge.svg';
 
 const container = {
   initial: {
@@ -43,11 +42,13 @@ const ballVariants = {
 };
 
 const Loader = ({
-  children, loading, callDispatch, list, reload = false, status, position = '25%',
+  children, loading, callDispatch, list, reload = false, status, position = '25%', auto = true,
 }) => {
   useEffect(() => {
-    if (list.length === 0 || reload) {
-      callDispatch();
+    if (auto) {
+      if (list.length === 0 || reload) {
+        callDispatch();
+      }
     }
   }, []);
 
@@ -76,9 +77,7 @@ const Loader = ({
               variants={ballVariants}
               initial="initial"
               animate="animate"
-            >
-              <Logo />
-            </motion.div>
+            />
           </motion.div>
         ) : (
           <motion.div
