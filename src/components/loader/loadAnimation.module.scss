@@ -1,0 +1,22 @@
+.ball {
+  height: 50px;
+  background: white;
+  width: 50px;
+}
+
+.mainContainer {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  bottom: 80px;
+  right: 100px;
+  scale: 0.3;
+}
+
+.rotatingFigs {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
