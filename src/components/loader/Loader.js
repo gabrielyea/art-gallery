@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './loaderStyle.module.scss';
+import LoadAnimation from './LoadAnimation';
 
 const container = {
   initial: {
@@ -65,19 +66,19 @@ const Loader = ({
             exit="hidden"
             style={{ top: position }}
           >
-            {}
-            <motion.div>
+            <LoadAnimation />
+            {/* <motion.div>
               {status === 'normal' ? (
                 <p>LOADING</p>) : (
-                  <p>ERROR: TOO MANY REQUESTS</p>)}
+                  <p>ERROR: Something whent wrong :C</p>)}
 
-            </motion.div>
-            <motion.div
+            </motion.div> */}
+            {/* <motion.div
               className={styles.ball}
               variants={ballVariants}
               initial="initial"
               animate="animate"
-            />
+            /> */}
           </motion.div>
         ) : (
           <motion.div
