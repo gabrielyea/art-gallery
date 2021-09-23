@@ -66,7 +66,7 @@ const child = {
 
 const Avatar = ({ data }) => {
   const [open, toggleOpen] = useToggle(false, true);
-  const [ref, inView] = useInView({ threshold: 0.5 });
+  const [ref, inView] = useInView({ threshold: 0.10 });
   const controls = useAnimation();
 
   useEffect(() => {
