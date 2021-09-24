@@ -47,7 +47,8 @@ const Home = () => {
             </h1>
           </div>
           <Search
-            search={toggleSearch}
+            toggleSearch={toggleSearch}
+            search={search}
           />
         </header>
         <DecorationBar
