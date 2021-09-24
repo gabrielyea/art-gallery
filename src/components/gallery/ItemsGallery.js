@@ -59,6 +59,7 @@ const ItemsGallery = () => {
             exit="exit"
             className={styles.itemList}
           >
+
             {createItems()}
           </motion.ul>
         )}

@@ -10,7 +10,11 @@ export const fetchList = createAsyncThunk('list/fetchList', async (query) => {
 export const searchList = createSlice({
   name: 'search',
   initialState: { entities: [], loading: 'idle', status: 'normal' },
-  reducers: {},
+  reducers: {
+    clearList(state) {
+      state.entities = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchList.pending, (state) => {
@@ -28,4 +32,5 @@ export const searchList = createSlice({
   },
 });
 
+export const { clearList } = searchList.actions;
 export default searchList.reducer;

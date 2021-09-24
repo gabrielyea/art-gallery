@@ -12,7 +12,11 @@ export const fetchData = createAsyncThunk('works/fetchData', async ([...queries]
 export const searchSlice = createSlice({
   name: 'works',
   initialState: { entities: [], loading: 'idle', status: 'normal' },
-  reducers: {},
+  reducers: {
+    clearSearch(state) {
+      state.entities = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchData.pending, (state) => {
@@ -30,4 +34,5 @@ export const searchSlice = createSlice({
   },
 });
 
+export const { clearSearch } = searchSlice.actions;
 export default searchSlice.reducer;
