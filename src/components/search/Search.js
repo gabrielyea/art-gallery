@@ -2,7 +2,9 @@
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
-import { fetchList } from './listSlice';
+import { FiRefreshCcw } from 'react-icons/fi';
+import { fetchList, clearList } from './listSlice';
+import { clearSearch } from './searchSlice';
 import MGlassIcon from './MGlassIcon';
 import styles from './searchStyle.module.scss';
 import useDataGetter from '../customHooks/useDataGetter';
@@ -57,12 +59,12 @@ const shadowAnim = {
   },
 };
 
-const Search = ({ search }) => {
+const Search = ({ search, toggleSearch }) => {
   const [option, setOption] = useState('author');
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.list.loading);
   const list = useSelector((state) => state.list.entities);
-  const ref = useRef(null);
+  const inputRef = useRef(null);
   const { getFromList } = useDataGetter();
 
   useEffect(() => {
@@ -76,11 +78,23 @@ const Search = ({ search }) => {
     setOption(e.target.value);
   };
 
+  const clearStates = () => {
+    if (search) {
+      dispatch(clearSearch());
+      dispatch(clearList());
+      toggleSearch();
+    }
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
-    const query = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${ref.current?.value}`;
+    if (search) {
+      clearStates();
+      return;
+    }
+    const query = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${inputRef.current?.value}`;
     dispatch(fetchList(query));
-    search();
+    toggleSearch();
   };
 
   return (
@@ -107,17 +121,34 @@ const Search = ({ search }) => {
         <div className={styles.inputContainer}>
           <motion.div variants={children1}>
             <motion.input
-              ref={ref}
+              ref={inputRef}
               variants={shadowAnim}
               animate="animate"
               whileFocus="open"
               type="text"
               placeholder={`Enter ${option} name`}
+              onFocus={clearStates}
             />
           </motion.div>
-          <motion.button type="submit">
-            <MGlassIcon />
-          </motion.button>
+          {search === true ? (
+            <motion.button
+              animate={{
+                rotate: -360,
+                transition: {
+                  repeat: Infinity, repeatType: 'loop', duration: 5, ease: 'easeInOut',
+                },
+              }}
+              whileHover={{ scale: 1.2 }}
+            >
+              <FiRefreshCcw className={styles.icon} />
+            </motion.button>
+          ) : (
+            <motion.button
+              whileHover={{ scale: 1.2 }}
+            >
+              <MGlassIcon />
+            </motion.button>
+          )}
         </div>
       </motion.form>
     </motion.div>
