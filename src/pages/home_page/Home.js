@@ -7,6 +7,7 @@ import useWindowDimensions from '../../components/customHooks/useWindowDimension
 import DecorationBar from '../../components/decoration_bar/DecorationBar';
 import ItemsGallery from '../../components/gallery/ItemsGallery';
 import Loader from '../../components/loader/Loader';
+import StatusMessage from '../../components/popup/StatusMessage';
 import Search from '../../components/search/Search';
 import styles from './homeStyle.module.scss';
 
@@ -23,7 +24,7 @@ const Home = () => {
   const { x } = useWindowDimensions();
   const [search, toggleSearch] = useToggle(false, true);
   const mainContainer = useRef(null);
-  const { loading, status } = useSelector((state) => state.list);
+  const { loading, error } = useSelector((state) => state.list);
 
   return (
     <>
@@ -57,9 +58,12 @@ const Home = () => {
         />
         {search && (
           <>
-            <Loader loading={loading} status={status} auto={false} position="80%">
+            <Loader loading={loading} status={error} auto={false} position="80%">
               <ItemsGallery />
             </Loader>
+            {error !== null && (
+              <StatusMessage status={error} />
+            )}
           </>
         )}
       </motion.div>
