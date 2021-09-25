@@ -60,10 +60,21 @@ const shadowAnim = {
 };
 
 const Search = ({ search, toggleSearch }) => {
-  const [option, setOption] = useState('author');
+  const options = [
+    {
+      name: 'tag',
+      message: "Search by tag, i.e., 'clouds'",
+      query: 'https://collectionapi.metmuseum.org/public/collection/v1/search?q=',
+    },
+    {
+      name: 'artist',
+      message: 'Search by artist or nationality',
+      query: 'https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q=',
+    }];
+
+  const [option, setOption] = useState(options[0]);
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.list.loading);
-  const list = useSelector((state) => state.list.entities);
+  const { entities: list, loading } = useSelector((state) => state.list);
   const inputRef = useRef(null);
   const { getFromList } = useDataGetter();
 
@@ -73,9 +84,9 @@ const Search = ({ search, toggleSearch }) => {
     }
   }, [loading]);
 
-  const handleOption = (e) => {
+  const handleOption = (e, index) => {
     e.preventDefault();
-    setOption(e.target.value);
+    setOption(options[index]);
   };
 
   const clearStates = () => {
@@ -92,7 +103,7 @@ const Search = ({ search, toggleSearch }) => {
       clearStates();
       return;
     }
-    const query = `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${inputRef.current?.value}`;
+    const query = `${option.query}${inputRef.current?.value}`;
     dispatch(fetchList(query));
     toggleSearch();
   };
@@ -103,19 +114,19 @@ const Search = ({ search, toggleSearch }) => {
         <div className={styles.optionsContainer}>
           <motion.button
             variants={children2}
-            className={option === 'author' ? styles.selected : styles.option}
-            onClick={(e) => handleOption(e, 'author')}
-            value="author"
+            className={option.name === 'tag' ? styles.selected : styles.option}
+            onClick={(e) => handleOption(e, 0)}
+            value="tag"
           >
-            Author
+            Tag
           </motion.button>
           <motion.button
             variants={children2}
-            className={option === 'work' ? styles.selected : styles.option}
-            onClick={(e) => handleOption(e, 'work')}
-            value="work"
+            className={option.name === 'artist' ? styles.selected : styles.option}
+            onClick={(e) => handleOption(e, 1)}
+            value="artist"
           >
-            Work
+            Artist
           </motion.button>
         </div>
         <div className={styles.inputContainer}>
@@ -126,7 +137,7 @@ const Search = ({ search, toggleSearch }) => {
               animate="animate"
               whileFocus="open"
               type="text"
-              placeholder={`Enter ${option} name`}
+              placeholder={option.message}
               onFocus={clearStates}
             />
           </motion.div>
