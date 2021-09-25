@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { useSelector } from 'react-redux';
 import useDataGetter from '../customHooks/useDataGetter';
 import LoadAnimation from '../loader/LoadAnimation';
+import StatusMessage from '../popup/StatusMessage';
 
 const variants = {
   initial: {
@@ -22,12 +23,16 @@ const LoadingArea = () => {
   const [current, setOffset] = useState(0);
   const [ref, inView] = useInView({ threshold: 1 });
   const { getFromList } = useDataGetter();
-  const { loading } = useSelector((state) => state.works);
+  const { loading, error } = useSelector((state) => state.works);
+
+  const getDataStack = () => {
+    getFromList(current + 4);
+    setOffset(current + 4);
+  };
 
   useEffect(() => {
-    if (inView) {
-      getFromList(current + 4);
-      setOffset(current + 4);
+    if (inView && error === null) {
+      getDataStack();
     }
   }, [inView]);
 
@@ -37,19 +42,24 @@ const LoadingArea = () => {
       ref={ref}
       style={{ width: '100%', height: '50px' }}
     >
-      <AnimatePresence>
-        {loading === 'pending' && (
-        <motion.div
-          style={{ color: 'white' }}
-          variants={variants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-        >
-          <LoadAnimation />
-        </motion.div>
+      {error === null ? (
+        <AnimatePresence>
+          {loading === 'pending' && (
+          <motion.div
+            style={{ color: 'white' }}
+            variants={variants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+          >
+            <LoadAnimation />
+          </motion.div>
+          )}
+        </AnimatePresence>
+      )
+        : (
+          <StatusMessage status={error} />
         )}
-      </AnimatePresence>
     </div>
   );
 };

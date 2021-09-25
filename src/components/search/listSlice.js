@@ -9,7 +9,7 @@ export const fetchList = createAsyncThunk('list/fetchList', async (query) => {
 
 export const searchList = createSlice({
   name: 'search',
-  initialState: { entities: [], loading: 'idle', status: 'normal' },
+  initialState: { entities: [], loading: 'idle', error: null },
   reducers: {
     clearList(state) {
       state.entities = [];
@@ -19,15 +19,20 @@ export const searchList = createSlice({
     builder
       .addCase(fetchList.pending, (state) => {
         state.loading = 'pending';
-        state.status = 'normal';
+        state.error = null;
       })
       .addCase(fetchList.fulfilled, (state, action) => {
+        if (action.payload === null) {
+          state.loading = 'idle';
+          state.error = 'No results for that search...';
+          return;
+        }
         state.entities = [...action.payload];
         state.loading = 'idle';
-        state.status = 'normal';
+        state.error = null;
       })
       .addCase(fetchList.rejected, (state) => {
-        state.status = 'error';
+        state.error = 'Server is unresponsive, try reloading...';
       });
   },
 });
