@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import Avatar from '../item/Avatar';
-import LoadingArea from '../loading/LoadingArea';
+import LoadingArea from '../loading_area/LoadingArea';
 import styles from './itemsGalleryStyle.module.scss';
 
 const container = {
@@ -31,7 +31,7 @@ const ItemsGallery = () => {
   const galleryRef = useRef(null);
 
   useEffect(() => {
-    if (allWorks.length === 4) {
+    if (allWorks.length > 0 && allWorks.length <= 4) {
       galleryRef.current?.scrollIntoView();
     }
   }, [allWorks]);
