@@ -46,7 +46,6 @@ const ItemsGallery = () => {
   return (
     <div
       className={styles.mainContainer}
-      title="gallery"
     >
       {allWorks.length > 0
         && (

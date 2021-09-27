@@ -32,6 +32,7 @@ const children1 = {
   },
 };
 
+// eslint-disable-next-line no-unused-vars
 const children2 = {
   initial: {
     scale: 0,
@@ -84,6 +85,7 @@ const Search = ({ search, toggleSearch }) => {
     }
   }, [loading]);
 
+  // eslint-disable-next-line no-unused-vars
   const handleOption = (e, index) => {
     e.preventDefault();
     setOption(options[index]);
@@ -91,6 +93,7 @@ const Search = ({ search, toggleSearch }) => {
 
   const clearStates = () => {
     if (search) {
+      inputRef.current.value = '';
       dispatch(clearSearch());
       dispatch(clearList());
       toggleSearch();
@@ -111,7 +114,7 @@ const Search = ({ search, toggleSearch }) => {
   return (
     <motion.div className={styles.mainContainer}>
       <motion.form variants={container} initial="initial" animate="animate" onSubmit={handleSearch}>
-        <div className={styles.optionsContainer}>
+        {/* <div className={styles.optionsContainer}>
           <motion.button
             variants={children2}
             className={option.name === 'tag' ? styles.selected : styles.option}
@@ -128,7 +131,7 @@ const Search = ({ search, toggleSearch }) => {
           >
             Artist
           </motion.button>
-        </div>
+        </div> */}
         <div className={styles.inputContainer}>
           <motion.div variants={children1}>
             <motion.input

@@ -40,7 +40,9 @@ const LoadingArea = () => {
     <div
       className="loadingArea"
       ref={ref}
-      style={{ width: '100%', height: '50px' }}
+      style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '50px',
+      }}
     >
       {error === null ? (
         <AnimatePresence>

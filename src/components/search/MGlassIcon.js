@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 const MGlassIcon = () => (
   <motion.span
     style={{
-      display: 'inline', scale: 0.8, position: 'relative', top: '-10px', width: 'inherit',
+      display: 'inline', transform: 'scale(0.8)', position: 'relative', top: '-10px', width: 'inherit',
     }}
   >
     <motion.svg

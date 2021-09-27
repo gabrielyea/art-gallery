@@ -10,12 +10,13 @@
     @include setFont();
 
     list-style: none;
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: 1fr 1fr;
-    justify-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     margin: 10em 0;
-    row-gap: 5em;
+    gap: 1em;
   }
 }
 
@@ -31,6 +32,7 @@
       grid-auto-flow: dense;
       gap: 1em;
       row-gap: 5em;
+      justify-items: center;
     }
   }
 }
