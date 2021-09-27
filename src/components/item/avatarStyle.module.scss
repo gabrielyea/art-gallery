@@ -1,6 +1,8 @@
+@use '../../shared/utils'as *;
+
 .mainContainer {
-  width: 650px;
-  height: 650px;
+  width: 300px;
+  height: 400px;
 
   .imgContainer {
     border-radius: 8px;
@@ -11,6 +13,8 @@
     flex-direction: column;
     justify-content: center;
     padding: 1em;
+    border: solid 1px;
+    border-color: darkgoldenrod;
 
     .img {
       width: 100%;
@@ -18,9 +22,15 @@
       border-radius: 8px;
       background-size: contain;
       background-position: center;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     .paintData {
+      display: flex;
+      flex-direction: column;
       border: solid rgba(255, 255, 255, 0.329) 1px;
       border-radius: 4px;
       margin: 1em;
@@ -28,6 +38,62 @@
 
       p {
         color: white;
+        font-size: 0.8rem;
+      }
+
+      .info {
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.616);
+      }
+    }
+  }
+}
+
+@include desktopResolution () {
+  .mainContainer {
+    width: 650px;
+    height: 650px;
+
+    .imgContainer {
+      border-radius: 8px;
+      background-color: #20272f;
+      width: inherit;
+      height: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1em;
+      border: solid 1px;
+      border-color: darkgoldenrod;
+
+      .img {
+        width: 100%;
+        background-repeat: no-repeat;
+        border-radius: 8px;
+        background-size: contain;
+        background-position: center;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .paintData {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: solid rgba(255, 255, 255, 0.329) 1px;
+        border-radius: 4px;
+        margin: 1em;
+        padding: 1em;
+
+        p {
+          color: white;
+        }
+
+        .info {
+          font-style: italic;
+          color: rgba(255, 255, 255, 0.616);
+        }
       }
     }
   }
