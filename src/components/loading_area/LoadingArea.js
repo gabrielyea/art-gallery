@@ -21,7 +21,7 @@ const variants = {
 
 const LoadingArea = () => {
   const [current, setOffset] = useState(0);
-  const [ref, inView] = useInView({ threshold: 1 });
+  const [ref, inView] = useInView({ threshold: 0.1 });
   const { getFromList } = useDataGetter();
   const { loading, error } = useSelector((state) => state.works);
 
@@ -40,7 +40,7 @@ const LoadingArea = () => {
     <div
       className="loadingArea"
       ref={ref}
-      style={{ width: '100%', height: '50px' }}
+      style={{ width: '100%', height: '100px' }}
     >
       {error === null ? (
         <AnimatePresence>
