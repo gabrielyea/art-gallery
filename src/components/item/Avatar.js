@@ -90,6 +90,7 @@ const Avatar = ({ data }) => {
           variants={viewVariants}
         >
           <motion.div
+            title={data.title}
             className={styles.img}
             onClick={toggleOpen}
             style={open ? openStyle : closeStyle}
@@ -108,23 +109,22 @@ const Avatar = ({ data }) => {
                 <motion.p variants={child}>
                   Artist:
                   {' '}
-                  {data.artistDisplayName}
+                  <span className={styles.info}>{data.artistDisplayName !== '' ? data.artistDisplayName : 'Unknown'}</span>
                 </motion.p>
                 <motion.p variants={child}>
                   Title:
                   {' '}
-                  {data.title}
+                  <span className={styles.info}>{data.title !== '' ? data.title : 'Unknown' }</span>
                 </motion.p>
                 <motion.p variants={child}>
                   Bio:
                   {' '}
-                  { data.artistDisplayBio }
-                  {data.artistDisplayName}
+                  <span className={styles.info}>{data.artistDisplayBio !== '' ? data.artistDisplayBio : 'Unknown'}</span>
                 </motion.p>
                 <motion.p variants={child}>
-                  classification:
+                  Classification:
                   {' '}
-                  {data.classification}
+                  <span className={styles.info}>{data.classification !== '' ? data.classification : 'Not specified'}</span>
                 </motion.p>
               </motion.div>
             )}
