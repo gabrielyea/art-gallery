@@ -25,6 +25,7 @@
         border-color: white;
         color: white;
         padding: 0.1em 0.2em;
+        width: 200px;
       }
 
       button {
@@ -38,7 +39,7 @@
     }
 
     .icon {
-      scale: 2;
+      transform: scale(2);
       color: rgba(255, 255, 255, 0.5);
     }
 
@@ -95,6 +96,7 @@
         input {
           font-size: 2rem;
           border-radius: 8px;
+          width: fit-content;
         }
       }
     }
