@@ -4,7 +4,8 @@
 ![](https://img.shields.io/badge/SCSS-pink)
 
 # Art gallery
-> This applications lets you keep track of your favorite crypto currencies.
+> The Metropolitan Museum collection gives you access to thousands of works for you to browse. Click on a piece to learn more about it or just keep scrolling to get more.
+> Just write the author name, nationality, category or a random word and you will get related pieces of art.
 
 ## Screenshots
 ![img](./misc/screenshot.png)
@@ -14,8 +15,11 @@ You can see my page live here:
 
 ## Preview
 
-![img](./misc/loader-test.gif)
-![img](./misc/themeChange.gif)
+### Mobile
+![img](./misc/mobileArtSearch.gif)
+
+### Desktop
+![img](./misc/desktopArtGallery.gif)
 
 
 ## Built With 🔨
@@ -52,4 +56,5 @@ Contributions, issues, and feature requests are welcome!
 Give a ⭐️ if you like this project!
 
 ## Acknowledgments
-This project was made following [Nelson Sakwa design!](https://www.behance.net/gallery/31579789/Ballhead-App-(Free-PSDs)).
+
+This project uses the [Metropolitan Museum Of Art Collection API](https://metmuseum.github.io/)
