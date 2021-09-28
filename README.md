@@ -4,7 +4,7 @@
 ![](https://img.shields.io/badge/SCSS-pink)
 
 # Art gallery
-> The Metropolitan Museum collection gives you access to thousands of works for you to browse. Click on a piece to learn more about it or just keep scrolling to get more.
+> The Metropolitan Museum collection gives you access to thousands of works for you to browse. Click on a piece to learn more about it or keep scrolling to get more.
 > Just write the author name, nationality, category or a random word and you will get related pieces of art.
 
 ## Screenshots
