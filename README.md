@@ -19,7 +19,7 @@ You can see my page live here:
 ![img](https://raw.githubusercontent.com/gabrielyea/art-gallery/ae148618af0b5cf4ede33cc5b20f52bae923689e/misc/mobileArtSearch.gif)
 
 ### Desktop
-![img](./misc/desktopArtGallery.gif)
+![img](https://raw.githubusercontent.com/gabrielyea/art-gallery/a6a9c4af5280a369c4684961632507ac29e4266a/misc/desktopArtGallery.gif)
 
 
 ## Built With 🔨
