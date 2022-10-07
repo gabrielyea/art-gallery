@@ -7,7 +7,7 @@
 The Metropolitan Museum collection gives you access to thousands of works for you to browse. Click on a piece to learn more about it, or keep scrolling to get more. Just write the author name, nationality, category, or a random word and, you'll get related pieces of art.
 
 ## Screenshots 📷
-![img](./misc/artGalleryScreenshot.png)
+![img](https://github.com/gabrielyea/art-gallery/blob/25ac99a4aa1cf40c341425965c37861ddf87fca7/misc/artGalleryScreenshot.png)
 
 ## Live Demo 🔴
 You can see my page live here: 
