@@ -16,7 +16,7 @@ You can see my page live here:
 ## Preview 🎥
 
 ### Mobile
-![img](./misc/mobileArtSearch.gif)
+![img](https://raw.githubusercontent.com/gabrielyea/art-gallery/ae148618af0b5cf4ede33cc5b20f52bae923689e/misc/mobileArtSearch.gif)
 
 ### Desktop
 ![img](./misc/desktopArtGallery.gif)
